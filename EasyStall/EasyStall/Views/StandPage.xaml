@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EasyStall.Views.StandPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:EasyStall.Models"
+    xmlns:viewmodels="clr-namespace:EasyStall.ViewModels"
+    x:DataType="viewmodels:StandViewModel"
+    BackgroundColor="{StaticResource PageBackground}"
+    Shell.NavBarIsVisible="False">
+    
+    <ContentPage.BindingContext>
+        <viewmodels:StandViewModel />
+    </ContentPage.BindingContext>
+    <ListView
+        CachingStrategy="RecycleElement"
+        GroupDisplayBinding="{Binding Key}"
+        IsGroupingEnabled="False"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        ItemsSource="{Binding StandGroups}"
+        RefreshCommand="{Binding RefreshCommand}"
+        SelectedItem="{Binding SelectedStand, Mode=TwoWay}"
+        Style="{StaticResource ListViewPage}">
+
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="model:Stand">
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Clicked="MenuItem_Clicked" Text="Réserver" />
+                        <MenuItem Clicked="MenuItem_Clicked_1" Text="Voir Détail" />
+                    </ViewCell.ContextActions>
+                    <Grid Padding="5">
+                        <Frame BackgroundColor="{StaticResource Primary}" CornerRadius="11">
+                            <StackLayout>
+                                <Label
+                                    TextColor="{StaticResource FontColorVariation2}"
+                                    FontSize="Medium"
+                                    Text="Stand"
+                                    VerticalOptions="Start" />
+                                <Label
+                                    TextColor="{StaticResource FontColorVariation2}"
+                                    FontSize="Medium"
+                                    Text="{Binding Number}"
+                                    VerticalTextAlignment="End" />
+                                <Label
+                                    TextColor="{StaticResource FontColorVariation2}"
+                                    FontSize="Medium"
+                                    HorizontalOptions="End"
+                                    Text="{Binding Size}" />
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Header>
+            <StackLayout Orientation="Horizontal">
+                <Label
+                    BackgroundColor="{StaticResource PageBackground}"
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Text=" Les Stands "
+                    TextColor="{StaticResource FontColor}" />
+
+            </StackLayout>
+        </ListView.Header>
+    </ListView>
+
+
+
+
+
+
+
+
+</ContentPage>

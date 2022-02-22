@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="EasyStall.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#2e2b2b</Color>
+            <Color x:Key="PageBackground">#242222</Color>
+            <Color x:Key="FontColor">#115570</Color>
+            <Color x:Key="FontColorVariation">#0c4359</Color>
+            <Color x:Key="FontColorVariation2">#1d83ab</Color>
+
+
+            <Style x:Key="ListViewPage" TargetType="ListView">
+                <Setter Property="HasUnevenRows" Value="True" />
+                <Setter Property="SeparatorVisibility" Value="None" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="IsPullToRefreshEnabled" Value="True" />
+                <Setter Property="RefreshControlColor" Value="{StaticResource FontColorVariation}" />
+            </Style>
+
+            <Style x:Key="AppButton" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource FontColor}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="WidthRequest" Value="150" />
+                <Setter Property="BorderWidth" Value="2" />
+                <Setter Property="BorderColor" Value="{StaticResource FontColor}" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            </Style>
+
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
