@@ -15,6 +15,8 @@ namespace EasyStall
 
             Routing.RegisterRoute(nameof(BenDashboardPage), typeof(BenDashboardPage));
 
+            Routing.RegisterRoute(nameof(ProfileBenPage), typeof(ProfileBenPage));
+
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
 
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));

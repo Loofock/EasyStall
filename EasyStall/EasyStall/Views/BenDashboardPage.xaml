@@ -8,7 +8,7 @@
     <Grid
         BackgroundColor="{StaticResource PageBackground}"
         ColumnDefinitions="Auto,Auto,Auto,Auto"
-        RowDefinitions="41,79,Auto">
+        RowDefinitions="41,79,Auto,Auto">
         <Label
             Grid.Row="1"
             Grid.Column="0"
@@ -37,6 +37,7 @@
             Grid.Column="2"
             Grid.ColumnSpan="4"
             Margin="10"
+            Command="{Binding Benbutton}"
             FontFamily="TW"
             FontSize="Medium"
             Style="{StaticResource AppButton}"
@@ -50,7 +51,7 @@
             Margin="10"
             BackgroundColor="Transparent"
             BorderColor="{StaticResource FontColor}">
-            <Label IsVisible="False" Text="Votre Stand" />
+            <Label Text="Adresse :                                                              Paris Parc Des Expositions                                        Villepinte 93420" TextColor="{StaticResource FontColor}" />
         </Frame>
 
     </Grid>

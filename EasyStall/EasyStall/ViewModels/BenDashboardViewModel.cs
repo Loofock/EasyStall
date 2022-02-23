@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EasyStall.Views;
+using MvvmHelpers.Commands;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -13,6 +15,7 @@ namespace EasyStall.ViewModels
             Email = email;
 
         }
+
 
         private string email;
         public string Email
@@ -46,6 +49,22 @@ namespace EasyStall.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs("Role"));
             }
         }
+        public Command Benbutton
+        {
+            get
+            {
+                return new Command(ProfilBenButton);
+            }
+        }
 
+        private async void ProfilBenButton()
+        {
+            var user = await FirebaseHelper.GetUser(Email);
+            if (user.FirstName != null)
+                await App.Current.MainPage.Navigation.PushAsync(new ProfileBenPage(Email));
+            else
+                await App.Current.MainPage.Navigation.PushAsync(new CreateProfileBenPage(Email));
+        }
+        
     }
-}
+};

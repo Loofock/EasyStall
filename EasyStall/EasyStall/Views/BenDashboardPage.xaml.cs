@@ -17,7 +17,6 @@ namespace EasyStall.Views
         public BenDashboardPage(string Email)
         {
             InitializeComponent();
-
             benDashboardViewModel = new BenDashboardViewModel(Email);
             BindingContext = benDashboardViewModel;
         }

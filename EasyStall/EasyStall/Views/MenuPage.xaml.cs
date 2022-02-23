@@ -17,7 +17,6 @@ namespace EasyStall.Views
         public MenuPage(string Email)
         {
             InitializeComponent();
-            
             menuViewModel = new MenuViewModel(Email);
             BindingContext = menuViewModel; 
         }

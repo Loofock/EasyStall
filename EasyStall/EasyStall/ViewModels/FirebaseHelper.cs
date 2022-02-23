@@ -3,6 +3,7 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,11 @@ namespace EasyStall.ViewModels
                         Password = item.Object.Password,
                         UserName = item.Object.UserName,
                         Role = item.Object.Role,
+                        FirstName = item.Object.FirstName,
+                        LastName = item.Object.LastName,
+                        PhoneNumber = item.Object.PhoneNumber,
+                        CompanyName = item.Object.CompanyName
+
                     }).ToList();
                   return userlist;
             }
@@ -57,6 +63,15 @@ namespace EasyStall.ViewModels
                 Debug.WriteLine($"Error:{e}");
                 return null;
             }
+        }
+        public ObservableCollection<Stand> GetStands()
+        {
+           var StandData = Firebase
+                .Child("Stand")
+                .AsObservable<Stand>()
+                .AsObservableCollection();
+
+            return StandData;
         }
 
         public static async Task<bool> AddUser(string Email, string UserName, string Password)
@@ -109,6 +124,27 @@ namespace EasyStall.ViewModels
                     .Child("User")
                     .Child(toUpdateUser.Key)
                     .PutAsync(new User() { Email = Email, UserName = Username, Password = Password, Role = Role });
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine($"Error:{e}");
+                return false;
+            }
+        }
+
+        public static async Task<bool> UpdateUserProfile(string Email, string Username, string Password, string Role, string FirstName, string LastName, string PhoneNumber)
+        {
+            try
+            {
+                var toUpdateUser = (await Firebase
+                    .Child("User")
+                    .OnceAsync<User>())
+                    .Where(a => a.Object.Email == Email).FirstOrDefault();
+                await Firebase
+                    .Child("User")
+                    .Child(toUpdateUser.Key)
+                    .PutAsync(new User() { Email = Email, UserName = Username, Password = Password, Role = Role, LastName = LastName, FirstName = FirstName, PhoneNumber = PhoneNumber });
                 return true;
             }
             catch (Exception e)

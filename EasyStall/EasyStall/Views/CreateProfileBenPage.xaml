@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EasyStall.Views.CreateProfileBenPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.Content>
+
+        <StackLayout BackgroundColor="{StaticResource PageBackground}">
+            <Label
+                Padding="30"
+                FontFamily="TW"
+                FontSize="Large"
+                HorizontalOptions="CenterAndExpand"
+                Text="Creation de Profil Bénévole"
+                TextColor="{StaticResource FontColorVariation2}"
+                VerticalOptions="Center" />
+            <BoxView
+                Margin="0,-10,0,10"
+                HeightRequest="2"
+                HorizontalOptions="Fill"
+                Color="{StaticResource FontColorVariation2}" />
+
+
+
+            <Label
+                FontFamily="TW"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="Prénom"
+                TextColor="{StaticResource FontColorVariation2}"
+                VerticalOptions="Center" />
+            <Entry
+                x:Name="FirstNameRegister"
+                FontFamily="TW"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Placeholder="Votre Prénom"
+                PlaceholderColor="{StaticResource FontColorVariation2}"
+                Text="{Binding FirstName}"
+                TextColor="{StaticResource FontColorVariation2}"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="250" />
+            <Label
+                FontFamily="TW"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="Nom de Famille"
+                TextColor="{StaticResource FontColorVariation2}"
+                VerticalOptions="Center" />
+            <Entry
+                x:Name="LastNameRegister"
+                FontFamily="TW"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Placeholder="Votre Nom"
+                PlaceholderColor="{StaticResource FontColorVariation2}"
+                Text="{Binding LastName}"
+                TextColor="{StaticResource FontColorVariation2}"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="250" />
+            <Label
+                FontFamily="TW"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="Numéro de téléphone"
+                TextColor="{StaticResource FontColorVariation2}"
+                VerticalOptions="Center" />
+            <Entry
+                x:Name="PNRegister"
+                FontFamily="TW"
+                HorizontalOptions="CenterAndExpand"
+                HorizontalTextAlignment="Center"
+                Keyboard="Telephone"
+                Placeholder="Votre Numéro de Téléphone"
+                PlaceholderColor="{StaticResource FontColorVariation2}"
+                Text="{Binding PhoneNumber}"
+                TextColor="{StaticResource FontColorVariation2}"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="265">
+                <Entry.Behaviors>
+                    <xct:CharactersValidationBehavior
+                        x:Name="PhoneNumberValidation"
+                        CharacterType="Digit"
+                        MaximumCharacterCount="10"
+                        MinimumCharacterCount="10" />
+                </Entry.Behaviors>
+            </Entry>
+            <Label
+                FontFamily="TW"
+                FontSize="10"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsNotValid, Source={x:Reference PhoneNumberValidation}}"
+                Text="Numéro non Accepté"
+                TextColor="Red" />
+
+
+
+
+            <Button
+                Command="{Binding NewProfileCommand}"
+                FontFamily="TW"
+                FontSize="Medium"
+                IsEnabled="{Binding IsValid, Source={x:Reference PhoneNumberValidation}}"
+                Style="{StaticResource AppButton}"
+                Text="Créer son profil"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="200" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
