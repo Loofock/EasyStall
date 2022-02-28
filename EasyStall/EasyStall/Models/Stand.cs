@@ -6,8 +6,6 @@
 
         public string Size { get; set; }
 
-        public string Email { get; set; }
-
         public string CompanyName { get; set; }
         
     }

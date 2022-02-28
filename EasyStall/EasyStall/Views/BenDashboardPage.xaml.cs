@@ -1,4 +1,5 @@
-﻿using EasyStall.ViewModels;
+﻿using EasyStall.Models;
+using EasyStall.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,10 @@ namespace EasyStall.Views
     public partial class BenDashboardPage : ContentPage
     {
         BenDashboardViewModel benDashboardViewModel;
-        public BenDashboardPage(string Email)
+        public BenDashboardPage(User user)
         {
             InitializeComponent();
-            benDashboardViewModel = new BenDashboardViewModel(Email);
+            benDashboardViewModel = new BenDashboardViewModel(user);
             BindingContext = benDashboardViewModel;
         }
 

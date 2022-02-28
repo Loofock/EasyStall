@@ -1,4 +1,5 @@
-﻿using EasyStall.ViewModels;
+﻿using EasyStall.Models;
+using EasyStall.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,12 @@ namespace EasyStall.Views
     public partial class CreateProfileBenPage : ContentPage
     {
         CreateProfileBenViewModel createProfileBenViewModel;
-        public CreateProfileBenPage(string Email)
+        public CreateProfileBenPage(User user)
         {
             InitializeComponent();
-            createProfileBenViewModel = new CreateProfileBenViewModel(Email);
+            createProfileBenViewModel = new CreateProfileBenViewModel(user);
             BindingContext = createProfileBenViewModel;
-            var user = FirebaseHelper.GetUser(Email);
+            
             
         }
     }

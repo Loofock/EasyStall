@@ -13,7 +13,9 @@
     <item name="colorPrimaryDark">#242222</item>
     <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-    <!--<item name="colorAccent">#FF4081</item>-->
+    
+	  <item name="colorAccent">#1d83ab</item>
+	
   </style>
 
 	<style name="Loading.Splash" parent="Theme.AppCompat.Light.NoActionBar">

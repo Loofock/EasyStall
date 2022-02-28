@@ -9,8 +9,8 @@
 
     <Grid
         BackgroundColor="{StaticResource PageBackground}"
-        ColumnDefinitions="Auto,Auto,Auto,Auto"
-        RowDefinitions="41,79,Auto">
+        ColumnDefinitions="Auto,Auto,Auto"
+        RowDefinitions="41,79,Auto,280,Auto,55">
         <Label
             Grid.Row="1"
             Grid.Column="0"
@@ -37,21 +37,21 @@
             Grid.Row="2"
             Grid.Column="0"
             Margin="10"
+            Command="{Binding BenevoleListCommand}"
             FontFamily="TW"
             FontSize="Medium"
             Style="{StaticResource AppButton}"
-            Text="Voir les Bénévoles"
-            />
+            Text="Voir les Bénévoles" />
 
         <Button
             Grid.Row="2"
             Grid.Column="2"
             Margin="10"
+            Command="{Binding StandListCommand}"
             FontFamily="TW"
             FontSize="Medium"
             Style="{StaticResource AppButton}"
-            Text="Voir les Stands"
-            Command="{Binding StandMove}" />
+            Text="Voir les Stands" />
 
         <Frame
             Grid.Row="3"
@@ -60,10 +60,41 @@
             Margin="10"
             BackgroundColor="Transparent"
             BorderColor="{StaticResource FontColor}">
-            <Label IsVisible="False" Text="Votre Stand" TextColor="{StaticResource FontColorVariation2}"/>
-            
+            <Label FontFamily="TW" TextColor="{StaticResource FontColorVariation2}">
+                <Label.Text>
+                    <MultiBinding StringFormat="{}Nom : {0}                                                         Prénom : {1}                                Nom D'entreprise : {2}">
+                        <Binding Path="LastName" />
+                        <Binding Path="FirstName" />
+                        <Binding Path="CompanyName" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
         </Frame>
 
+        <Frame
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Margin="10"
+            BackgroundColor="Transparent"
+            BorderColor="Transparent">
+            <Label
+                IsVisible="False"
+                Text="Votre Stand"
+                TextColor="{StaticResource FontColorVariation2}" />
+
+        </Frame>
+        <Button
+            Grid.Row="5"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Margin="5"
+            Command="{Binding ProButton}"
+            FontFamily="TW"
+            FontSize="Medium"
+            Style="{StaticResource AppButton}"
+            Text="Modifier votre Profil"
+            WidthRequest="280" />
     </Grid>
 
 </ContentPage>

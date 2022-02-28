@@ -3,10 +3,68 @@
     x:Class="EasyStall.Views.ListBenevolePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:model="clr-namespace:EasyStall.Models">
-    <ListView>
+    xmlns:model="clr-namespace:EasyStall.Models"
+    xmlns:viewmodel="clr-namespace:EasyStall.ViewModels"
+    Shell.NavBarIsVisible="False">
+    <ListView
+        x:Name="ListBenevole"
+        BackgroundColor="{StaticResource PageBackground}"
+        ItemsSource="{Binding benevoles}"
+        SeparatorVisibility="None">
         <ListView.ItemTemplate>
-            <DataTemplate x:DataType="model:Benevole" />
+            <DataTemplate>
+                <ViewCell>
+                    <Grid Padding="5">
+                        <Frame
+                            BackgroundColor="Transparent"
+                            BorderColor="{StaticResource FontColorVariation2}"
+                            CornerRadius="5"
+                            MinimumHeightRequest="25">
+                            <StackLayout
+                                BackgroundColor="Transparent"
+                                HeightRequest="20"
+                                Orientation="Horizontal">
+                                <Label
+                                    FontFamily="TW"
+                                    Text="{Binding FirstName}"
+                                    TextColor="{StaticResource FontColorVariation2}" />
+                                <Label
+                                    FontFamily="TW"
+                                    Text="{Binding LastName}"
+                                    TextColor="{StaticResource FontColorVariation2}" />
+                                <Label
+                                    FontFamily="TW"
+                                    Text="{Binding Age}"
+                                    TextColor="{StaticResource FontColorVariation2}" />
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
         </ListView.ItemTemplate>
+        <ListView.Header>
+            <StackLayout Orientation="Horizontal">
+                <Label
+                    BackgroundColor="{StaticResource PageBackground}"
+                    FontFamily="TW"
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Bénévoles"
+                    TextColor="{StaticResource FontColor}" />
+
+            </StackLayout>
+        </ListView.Header>
+        <ListView.Footer>
+            <Button
+                Command="{Binding RetourCommand}"
+                FontFamily="TW"
+                Style="{StaticResource AppButton}"
+                Text="Retour"
+                TextColor="{StaticResource FontColor}" />
+        </ListView.Footer>
+
     </ListView>
+
+
+
 </ContentPage>

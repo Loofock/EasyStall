@@ -3,15 +3,73 @@
     x:Class="EasyStall.Views.ProfileBenPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:EasyStall.ViewModels"
+    x:DataType="viewmodels:ProfileBenViewModel"
     Shell.NavBarIsVisible="False">
 
     <StackLayout BackgroundColor="{StaticResource PageBackground}">
 
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="6"
+            Margin="30"
+            FontFamily="TW"
+            FontSize="Medium"
+            HorizontalOptions="CenterAndExpand"
+            Text="Votre Profil"
+            TextColor="{StaticResource FontColorVariation2}"
+            VerticalOptions="Start" />
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="6"
+            FontFamily="TW"
+            FontSize="Medium"
+            HorizontalOptions="Center"
+            TextColor="{StaticResource FontColorVariation2}"
+            VerticalOptions="Start">
+            <Label.Text>
+                <MultiBinding StringFormat="{}{0} {1}, {2}">
+                    <Binding Path="FirstName" />
+                    <Binding Path="LastName" />
+                    <Binding Path="Age" />
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+        <Frame
+            Margin="10"
+            BackgroundColor="{StaticResource PageBackground}"
+            BorderColor="{StaticResource FontColorVariation}">
+            <Editor
+                x:Name="DescriptionText"
+                AutoSize="TextChanges"
+                FontFamily="TW"
+                HeightRequest="250"
+                HorizontalOptions="Center"
+                IsSpellCheckEnabled="True"
+                Placeholder="Ecrivez une Description de vous même"
+                PlaceholderColor="{StaticResource FontColorVariation2}"
+                Text="{Binding DescriptionTxt}"
+                TextColor="{StaticResource FontColorVariation2}"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="250" />
+        </Frame>
 
+        <Button
+            Command="{Binding DescriptionCommand}"
+            FontFamily="TW"
+            HorizontalOptions="Center"
+            Style="{StaticResource AppButton}"
+            Text="Mettre sa Description à jour" />
+        <Button
+            Margin="10"
+            Command="{Binding RetourCommand}"
+            FontFamily="TW"
+            HorizontalOptions="End"
+            Style="{StaticResource AppButton}"
+            Text="Retour" />
 
-        <Label Text="{Binding FirstName}" />
-        <Label Text="{Binding LastName}" />
-        <Label Text="{Binding PhoneNumber}" />
 
 
 

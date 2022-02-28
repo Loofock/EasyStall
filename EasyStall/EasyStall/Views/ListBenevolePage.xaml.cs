@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EasyStall.Models;
+using EasyStall.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,20 @@ namespace EasyStall.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListBenevolePage : ContentPage
     {
-        public ListBenevolePage()
+        
+     
+
+        public ListBenevolePage(User user)
         {
             InitializeComponent();
+            
+
+        }
+        protected override async void OnAppearing()
+        {
+            var benevoles = await FirebaseHelper.GetAllBenevole();
+            ListBenevole.ItemsSource = benevoles;
+
         }
     }
 }

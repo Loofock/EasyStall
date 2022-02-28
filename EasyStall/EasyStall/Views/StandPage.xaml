@@ -8,7 +8,7 @@
     x:DataType="viewmodels:StandViewModel"
     BackgroundColor="{StaticResource PageBackground}"
     Shell.NavBarIsVisible="False">
-    
+
     <ContentPage.BindingContext>
         <viewmodels:StandViewModel />
     </ContentPage.BindingContext>
@@ -33,20 +33,20 @@
                         <Frame BackgroundColor="{StaticResource Primary}" CornerRadius="11">
                             <StackLayout>
                                 <Label
-                                    TextColor="{StaticResource FontColorVariation2}"
                                     FontSize="Medium"
                                     Text="Stand"
+                                    TextColor="{StaticResource FontColorVariation2}"
                                     VerticalOptions="Start" />
                                 <Label
-                                    TextColor="{StaticResource FontColorVariation2}"
                                     FontSize="Medium"
                                     Text="{Binding Number}"
+                                    TextColor="{StaticResource FontColorVariation2}"
                                     VerticalTextAlignment="End" />
                                 <Label
-                                    TextColor="{StaticResource FontColorVariation2}"
                                     FontSize="Medium"
                                     HorizontalOptions="End"
-                                    Text="{Binding Size}" />
+                                    Text="{Binding Size}"
+                                    TextColor="{StaticResource FontColorVariation2}" />
                             </StackLayout>
                         </Frame>
                     </Grid>

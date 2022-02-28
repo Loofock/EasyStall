@@ -18,15 +18,13 @@ namespace EasyStall.Views
     {
         ProfileBenViewModel profileBenViewModel;
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
 
 
-        public ProfileBenPage(string Email)
+
+        public ProfileBenPage(User user)
         {
             InitializeComponent();
-            profileBenViewModel = new ProfileBenViewModel(Email);
+            profileBenViewModel = new ProfileBenViewModel(user);
             BindingContext = profileBenViewModel;
 
 

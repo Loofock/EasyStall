@@ -3,12 +3,14 @@
     x:Class="EasyStall.Views.BenDashboardPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:EasyStall.ViewModels"
+    x:DataType="viewmodels:BenDashboardViewModel"
     Shell.NavBarIsVisible="False">
 
     <Grid
         BackgroundColor="{StaticResource PageBackground}"
         ColumnDefinitions="Auto,Auto,Auto,Auto"
-        RowDefinitions="41,79,Auto,Auto">
+        RowDefinitions="41,79,Auto,Auto,Auto">
         <Label
             Grid.Row="1"
             Grid.Column="0"
@@ -41,7 +43,7 @@
             FontFamily="TW"
             FontSize="Medium"
             Style="{StaticResource AppButton}"
-            Text="Voir mon Profil Bénévole" />
+            Text="Modifier mon Profil Bénévole" />
 
 
         <Frame
@@ -51,7 +53,39 @@
             Margin="10"
             BackgroundColor="Transparent"
             BorderColor="{StaticResource FontColor}">
-            <Label Text="Adresse :                                                              Paris Parc Des Expositions                                        Villepinte 93420" TextColor="{StaticResource FontColor}" />
+            <Label Text="Adresse de l'Exposition :                                                              Paris Parc Des Expositions                                        Villepinte 93420" TextColor="{StaticResource FontColor}" />
+        </Frame>
+        <Frame
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="6"
+            Margin="10"
+            BackgroundColor="Transparent"
+            BorderColor="{StaticResource FontColor}">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="6"
+                FontFamily="TW"
+                TextColor="{StaticResource FontColorVariation2}"
+                VerticalOptions="Start">
+                <Label.Text>
+                    <MultiBinding StringFormat="{}Prénom : {0}                                                                           Nom : {1}                                                                             Age : {2}">
+                        <Binding Path="FirstName" />
+                        <Binding Path="LastName" />
+                        <Binding Path="Age" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+        </Frame>
+        <Frame
+            Grid.Row="5"
+            Grid.Column="0"
+            Grid.ColumnSpan="6"
+            Margin="10"
+            BackgroundColor="Transparent"
+            BorderColor="{StaticResource FontColor}">
+            <Label Text="{Binding Description}" TextColor="{StaticResource FontColor}" />
         </Frame>
 
     </Grid>

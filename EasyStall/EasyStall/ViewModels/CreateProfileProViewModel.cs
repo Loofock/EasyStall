@@ -1,18 +1,16 @@
 ﻿using EasyStall.Models;
 using EasyStall.Views;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace EasyStall.ViewModels
 {
-    public class CreateProfileBenViewModel : INotifyPropertyChanged
+    public class CreateProfileProViewModel : INotifyPropertyChanged
     {
-        public CreateProfileBenViewModel(User user)
+        public CreateProfileProViewModel(User user)
         {
             Email = user.Email;
 
@@ -50,28 +48,36 @@ namespace EasyStall.ViewModels
             }
 
         }
-        private string phoneNumber;
-        public string PhoneNumber
+
+        private string companyName;
+        public string CompanyName
         {
-            get { return phoneNumber; }
+            get { return companyName; }
             set
             {
-                phoneNumber = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("PhoneNumber"));
+                companyName = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("CompanyName"));
             }
 
         }
-        private string age;
-        public string Age
+        public Command RetourButton
         {
-            get { return age; }
-            set
+            get
             {
-                age = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Age"));
+                return new Command(Retour);
             }
+        }
+
+        private async void Retour()
+        {
+            var user = await FirebaseHelper.GetUser(Email);
+            await App.Current.MainPage.Navigation.PushAsync(new ProDashboardPage(user));
 
         }
+
+
+
+
         public Command NewProfileCommand
         {
             get
@@ -81,7 +87,7 @@ namespace EasyStall.ViewModels
         }
         private async void NewProfile()
         {
-            if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) || string.IsNullOrWhiteSpace(PhoneNumber))
+            if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) || string.IsNullOrWhiteSpace(CompanyName))
                 await App.Current.MainPage.DisplayAlert("Champs Vides", "Remplissez Tous les champs", "OK");
             else
             {
@@ -90,11 +96,11 @@ namespace EasyStall.ViewModels
                 {
                     string LastName = lastName;
                     string FirstName = firstName;
-                    string PhoneNumber = phoneNumber;
-                    string Age = age;
+                    string CompanyName = companyName;
+                    
 
-                    await FirebaseHelper.UpdateUserProfile(user.Email, user.UserName, user.Password, user.Role, FirstName, LastName, user.CompanyName, Age, PhoneNumber);
-                    await App.Current.MainPage.Navigation.PushAsync(new BenDashboardPage(user));
+                    await FirebaseHelper.UpdateUserProfile(user.Email, user.UserName, user.Password, user.Role, FirstName, LastName, CompanyName, user.Age, user.PhoneNumber);
+                    await App.Current.MainPage.Navigation.PushAsync(new ProDashboardPage(user));
                 }
                 else
                 {
@@ -102,6 +108,5 @@ namespace EasyStall.ViewModels
                 }
             }
         }
-        
     }
 }

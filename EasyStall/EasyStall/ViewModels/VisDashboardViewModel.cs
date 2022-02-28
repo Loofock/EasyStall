@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyStall.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -7,9 +8,10 @@ namespace EasyStall.ViewModels
 {
     public class VisDashboardViewModel : INotifyPropertyChanged
     {
-        public VisDashboardViewModel(string email)
+        public VisDashboardViewModel(User user)
         {
-            Email = email;
+            Email = user.Email;
+            UserName = user.UserName; 
         }
 
         private string email;

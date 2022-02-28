@@ -1,4 +1,5 @@
-﻿using EasyStall.ViewModels;
+﻿using EasyStall.Models;
+using EasyStall.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,12 @@ namespace EasyStall.Views
     {
 
         ProDashboardViewModel proDashboardViewModel;
-        public ProDashboardPage(string Email)
+        public ProDashboardPage(User user)
         {
             InitializeComponent();
-            proDashboardViewModel = new ProDashboardViewModel(Email);
+            proDashboardViewModel = new ProDashboardViewModel(user);
             BindingContext = proDashboardViewModel;
-            var user = FirebaseHelper.GetUser(Email);
+            
             
            
         }

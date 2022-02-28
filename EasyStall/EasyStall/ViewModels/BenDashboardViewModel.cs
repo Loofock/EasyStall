@@ -1,4 +1,5 @@
-﻿using EasyStall.Views;
+﻿using EasyStall.Models;
+using EasyStall.Views;
 using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,28 @@ namespace EasyStall.ViewModels
     public class BenDashboardViewModel : INotifyPropertyChanged
     {
 
-        public BenDashboardViewModel(string email)
+        public BenDashboardViewModel(User user)
         {
-            Email = email;
+            Email = user.Email;
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            Age = user.Age;
+            PhoneNumber = user.PhoneNumber;
+            Description = user.Description;
 
         }
+        private string description;
 
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
+        
+        public string Age { get; set; }
 
         private string email;
         public string Email
@@ -61,9 +78,10 @@ namespace EasyStall.ViewModels
         {
             var user = await FirebaseHelper.GetUser(Email);
             if (user.FirstName != null)
-                await App.Current.MainPage.Navigation.PushAsync(new ProfileBenPage(Email));
+
+                await App.Current.MainPage.Navigation.PushAsync(new ProfileBenPage(user));
             else
-                await App.Current.MainPage.Navigation.PushAsync(new CreateProfileBenPage(Email));
+                await App.Current.MainPage.Navigation.PushAsync(new CreateProfileBenPage(user));
         }
         
     }

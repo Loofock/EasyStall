@@ -34,20 +34,20 @@ namespace EasyStall.ViewModels
                             switch (user.Role)
                             {
                                 case ("Pro"):
-                                    await App.Current.MainPage.Navigation.PushAsync(new ProDashboardPage(Email));
+                                    await App.Current.MainPage.Navigation.PushAsync(new ProDashboardPage(user));
                                     break;
                                 case ("Vis"):
-                                    await App.Current.MainPage.Navigation.PushAsync(new VisDashboardPage(Email));
+                                    await App.Current.MainPage.Navigation.PushAsync(new VisDashboardPage(user));
                                     break;
                                 case ("Ben"):
-                                    await App.Current.MainPage.Navigation.PushAsync(new BenDashboardPage(Email));
+                                    await App.Current.MainPage.Navigation.PushAsync(new BenDashboardPage(user));
                                     break;
 
                             }
 
                         }
                         else
-                        await App.Current.MainPage.Navigation.PushAsync(new MenuPage(Email));
+                        await App.Current.MainPage.Navigation.PushAsync(new MenuPage(user));
 
                     }
                 else

@@ -1,4 +1,5 @@
-﻿using EasyStall.Views;
+﻿using EasyStall.Models;
+using EasyStall.Views;
 using MvvmHelpers;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,10 @@ namespace EasyStall.ViewModels
 {
     public class MenuViewModel : INotifyPropertyChanged
     {
-        public MenuViewModel(string email)
+        public MenuViewModel(User user)
         {
-            Email = email;
+            Email = user.Email;
+            
 
         }
 
@@ -70,7 +72,7 @@ namespace EasyStall.ViewModels
                 string Pro = "Pro";
 
                 await FirebaseHelper.UpdateUserRole(user.Email,user.UserName,user.Password, Pro);
-                await Shell.Current.GoToAsync($"{ nameof(ProDashboardPage)}");
+                await App.Current.MainPage.Navigation.PushAsync(new ProDashboardPage(user));
             }
             else
                 await App.Current.MainPage.DisplayAlert("Oopsies", "User not found", "OK");
@@ -96,7 +98,7 @@ namespace EasyStall.ViewModels
                 string Vis = "Vis";
 
                 await FirebaseHelper.UpdateUserRole(user.Email, user.UserName, user.Password, Vis);
-                await Shell.Current.GoToAsync($"{ nameof(VisDashboardPage)}");
+                await App.Current.MainPage.Navigation.PushAsync(new VisDashboardPage(user));
             }
             else
                 await App.Current.MainPage.DisplayAlert("Oopsies", "User not found", "OK");
@@ -121,7 +123,7 @@ namespace EasyStall.ViewModels
                 string Ben = "Ben";
 
                 await FirebaseHelper.UpdateUserRole(user.Email, user.UserName, user.Password, Ben );
-                await Shell.Current.GoToAsync($"{ nameof(BenDashboardPage)}");
+                await App.Current.MainPage.Navigation.PushAsync(new BenDashboardPage(user));
             }
             else
                 await App.Current.MainPage.DisplayAlert("Oopsies", "User not found", "OK");

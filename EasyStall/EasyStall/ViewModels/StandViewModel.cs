@@ -12,9 +12,9 @@ namespace EasyStall.ViewModels
 {
     public class StandViewModel : ViewModelBase
     {
-        public StandViewModel(string email)
+        public StandViewModel(User user)
         {
-            Email = email;
+            Email = user.Email;
 
         }
         private string email;

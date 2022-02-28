@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,8 +31,10 @@ namespace EasyStall.ViewModels
                         Role = item.Object.Role,
                         FirstName = item.Object.FirstName,
                         LastName = item.Object.LastName,
+                        Age = item.Object.Age,
                         PhoneNumber = item.Object.PhoneNumber,
-                        CompanyName = item.Object.CompanyName
+                        CompanyName = item.Object.CompanyName,
+                        Description = item.Object.Description
 
                     }).ToList();
                   return userlist;
@@ -59,6 +62,61 @@ namespace EasyStall.ViewModels
                 return allUsers.Where(a => a.Email == Email).FirstOrDefault();
             }
             catch(Exception e)
+            {
+                Debug.WriteLine($"Error:{e}");
+                return null;
+            }
+        }
+
+        /*public ObservableCollection<User> GetBenevoles()
+        {
+            var BenevoleData = Firebase
+                .Child("User")
+                .AsObservable<User>()
+                .AsObservableCollection()
+                .Where(a => a.Description != null);
+
+            return BenevoleData;
+        }*/
+
+        public static async Task<List<User>> GetAllBenevole()
+        {
+            try
+            {
+                var benevolelist = (await Firebase
+                    .Child("User")
+                    .OnceAsync<User>()).Select(item =>
+                    new User
+
+                    {
+
+                        FirstName = item.Object.FirstName,
+                        LastName = item.Object.LastName,
+                        Age = item.Object.Age,
+                        PhoneNumber = item.Object.PhoneNumber,
+                        Description = item.Object.Description
+
+                    }).Where(a => a.Description != null).ToList();
+                return benevolelist;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine($"Error:{e}");
+                return null;
+            }
+        }
+
+        public static async Task<User> GetBenevole(string Description)
+        {
+            try
+            {
+                var allBenevole = await GetAllBenevole();
+                await Firebase
+                .Child("User")
+                .OnceAsync<User>();
+                return allBenevole.Where(a => a.Description == Description).FirstOrDefault();
+            }
+            catch (Exception e)
             {
                 Debug.WriteLine($"Error:{e}");
                 return null;
@@ -133,7 +191,7 @@ namespace EasyStall.ViewModels
             }
         }
 
-        public static async Task<bool> UpdateUserProfile(string Email, string Username, string Password, string Role, string FirstName, string LastName, string PhoneNumber)
+        public static async Task<bool> UpdateUserProfile(string Email, string Username, string Password, string Role, string FirstName, string LastName,string CompanyName, string Age, string PhoneNumber)
         {
             try
             {
@@ -144,7 +202,28 @@ namespace EasyStall.ViewModels
                 await Firebase
                     .Child("User")
                     .Child(toUpdateUser.Key)
-                    .PutAsync(new User() { Email = Email, UserName = Username, Password = Password, Role = Role, LastName = LastName, FirstName = FirstName, PhoneNumber = PhoneNumber });
+                    .PutAsync(new User() { Email = Email, UserName = Username, Password = Password, Role = Role, LastName = LastName, FirstName = FirstName,CompanyName = CompanyName, Age = Age, PhoneNumber = PhoneNumber });
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine($"Error:{e}");
+                return false;
+            }
+        }
+
+        public static async Task<bool> AddBenevole(string Email, string Username, string Password, string Role, string FirstName, string LastName, string Age, string PhoneNumber, string Description)
+        {
+            try
+            {
+                var toUpdateUser = (await Firebase
+                    .Child("User")
+                    .OnceAsync<User>())
+                    .Where(a => a.Object.FirstName == FirstName).FirstOrDefault();
+                await Firebase
+                    .Child("User")
+                    .Child(toUpdateUser.Key)
+                    .PutAsync(new User() { Email = Email, UserName = Username, Password = Password, Role = Role, LastName = LastName, FirstName = FirstName, Age = Age, PhoneNumber = PhoneNumber, Description = Description });
                 return true;
             }
             catch (Exception e)

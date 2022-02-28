@@ -67,7 +67,8 @@ namespace EasyStall.ViewModels
                 if (user)
                 {
                     await App.Current.MainPage.DisplayAlert("Succès", "Vous vous êtes enregistré", "OK");
-                    await App.Current.MainPage.Navigation.PushAsync(new MenuPage(Email));
+                    var user1 = await FirebaseHelper.GetUser(Email);
+                    await App.Current.MainPage.Navigation.PushAsync(new MenuPage(user1));
                 }
                 else
                 {

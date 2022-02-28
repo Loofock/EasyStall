@@ -16,10 +16,10 @@ namespace EasyStall.Views
     public partial class StandPage : ContentPage
     {
         StandViewModel standViewModel;
-        public StandPage(string Email)
+        public StandPage(User user)
         {
             InitializeComponent();
-            standViewModel = new StandViewModel(Email);
+            standViewModel = new StandViewModel(user);
             BindingContext = standViewModel;
         }
 
